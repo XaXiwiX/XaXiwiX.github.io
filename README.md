@@ -65,6 +65,11 @@ réponses partent de la boîte de destination.
 | `support@xiwix.be` | support App Store + politique de confidentialité | oui |
 | `dev@xiwix.be` | compte Apple Developer — **identifiant de connexion** | **jamais** |
 
+> **Combell publie en différé.** Une redirection créée dans le panneau n'est pas
+> encore appliquée sur la plateforme `mailprotect` : les envois de test faits dans
+> la minute rebondissent en `550 5.1.1 Recipient address rejected`. Comptez une à
+> deux minutes avant de conclure quoi que ce soit. La zone DNS se comporte pareil.
+
 ### À faire avant la mise en vente : convertir `support@` en vraie boîte
 
 C'est la seule des trois qui doit pouvoir **envoyer**. Tant qu'elle est une
