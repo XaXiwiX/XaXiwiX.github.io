@@ -87,24 +87,29 @@ confidentialité.
 l'écrire sur le site — c'est l'identifiant du compte qui détient le programme
 développeur, les certificats de signature et la fiche.
 
-## La politique de confidentialité n'est pas encore ici, exprès
+## La politique de confidentialité
 
-La source est `~/le-bon/CONFIDENTIALITE.md` (FR/NL/EN). Elle ne peut pas être
-publiée telle quelle : `~/le-bon/PUBLIER-SUR-IOS.md` relève trois défauts, dont
-deux ne sont pas des défauts de rédaction mais des écarts entre le texte et le
-comportement du logiciel.
+En ligne sur `/421/confidentialite/`, en trois langues (FR complet, NL et EN
+condensés), avec ancres `#fr` / `#nl` / `#en`.
 
-1. le décompte quotidien est déclaré « anonyme » alors qu'il ne l'est pas ;
-2. *EFFACER MES DONNÉES* laisse survivre les métriques, alors que le texte
-   promet un effacement complet ;
-3. bases légales et destinataires manquants (celui-ci est purement rédactionnel).
+Sa **source de vérité est `~/le-bon/CONFIDENTIALITE.md`** — la page HTML en est
+la transcription. Toute correction se fait dans la source d'abord, sinon les
+deux divergent en silence.
 
-Les deux premiers se corrigent soit dans le code, soit dans le texte — c'est une
-décision produit qui appartient à la session 421. **Une déclaration fausse vaut
-retrait de l'application, pas seulement rejet** : tant que ce n'est pas tranché,
-l'URL reste libre plutôt que fausse.
+Le texte a été réécrit le 5 septembre 2026 à partir de
+`~/le-bon/INVENTAIRE-DONNEES.md`, qui établit par lecture du code ce que le
+serveur écrit réellement. Trois corrections de fond par rapport au brouillon :
 
-Quand la page sera écrite, décommenter le lien vers elle dans `421/support/index.html`.
+1. le décompte quotidien n'est plus dit « anonyme » — il est indexé par jeton
+   d'appareil, donc **pseudonyme**, et déclaré comme tel ;
+2. l'effacement déclare désormais **ce qui survit** : les compteurs d'usage
+   vivent jusqu'à 30 jours de plus, le bouton ne les touche pas ;
+3. bases légales (art. 6) et destinataires ajoutés, ainsi qu'une section sur le
+   traitement des **adresses IP**, qui manquait entièrement.
+
+⚠️ **Le jour où la liaison de compte ou les achats s'activent, cette page se met
+à jour AVANT** — la liste des neuf points à dérouler est dans
+`~/le-bon/INVENTAIRE-DONNEES.md` §8.
 
 ## En ligne depuis le 5 septembre 2026
 
