@@ -53,18 +53,34 @@ n'est pas contournable en gardant la voie Organisation.
 
 Les coordonnées déclarées chez Apple doivent être **identiques** à celles-ci.
 
-## Les deux adresses e-mail doivent exister avant la vérification
+## Les trois adresses e-mail
 
-Elles ne sont pas encore créées chez Combell. Une adresse citée sur le site et
-dans la fiche App Store qui rebondit est un mauvais signal de vérification.
+Créées le 5 septembre 2026 chez Combell, **toutes en redirection** vers
+`x.lallemand@xiwix.be`. Une redirection reçoit mais ne peut pas envoyer : les
+réponses partent de la boîte de destination.
 
-- `contact@xiwix.be` — une simple redirection suffit. Elle est publique, donc
-  exposée aux robots ; en cas d'abus, une redirection se supprime et se recrée.
-- `support@xiwix.be` — citée trois fois dans la politique de confidentialité et
-  dans la fiche App Store. Prévoir un envoi **depuis** cette adresse (boîte
-  réelle, ou « send as » dans le client de messagerie) : avec une simple
-  redirection, les réponses partent de la boîte personnelle et la dévoilent à
-  chaque utilisateur qui écrit.
+| Adresse | Rôle | Publiée |
+|---|---|---|
+| `contact@xiwix.be` | contact société, site + déclaration « trader » | oui |
+| `support@xiwix.be` | support App Store + politique de confidentialité | oui |
+| `dev@xiwix.be` | compte Apple Developer — **identifiant de connexion** | **jamais** |
+
+### À faire avant la mise en vente : convertir `support@` en vraie boîte
+
+C'est la seule des trois qui doit pouvoir **envoyer**. Tant qu'elle est une
+redirection, chaque réponse à un joueur ou à une demande RGPD part de
+`x.lallemand@xiwix.be` — une adresse nominative devant chaque utilisateur.
+
+Rien ne presse : Apple ne teste jamais l'envoi, seulement que l'adresse reçoive.
+La gêne commence au premier joueur qui écrit, donc après le lancement. La
+conversion est indolore — supprimer la redirection, créer la boîte du même nom —
+et **ne touche à rien de publié** : la chaîne `support@xiwix.be` ne change pas,
+ni sur le site, ni dans la fiche App Store, ni dans la politique de
+confidentialité.
+
+`dev@` reste une redirection sans problème : elle n'a qu'à recevoir. Ne jamais
+l'écrire sur le site — c'est l'identifiant du compte qui détient le programme
+développeur, les certificats de signature et la fiche.
 
 ## La politique de confidentialité n'est pas encore ici, exprès
 
