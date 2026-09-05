@@ -87,6 +87,52 @@ confidentialité.
 l'écrire sur le site — c'est l'identifiant du compte qui détient le programme
 développeur, les certificats de signature et la fiche.
 
+## Le jeu, sous `/421/`
+
+```
+421/index.html          présentation du jeu
+421/jouer/              build web d'Expo — 3,8 Mo, 20 fichiers, artefact généré
+421/support/            support App Store
+421/confidentialite/    politique de confidentialité
+```
+
+**Les quatre pages portent `noindex`.** L'accès par lien reste entier ; c'est le
+référencement qui est bloqué, pour qu'un client de XiwiX qui cherche la société
+ne tombe jamais sur un jeu de dés. Retirer la balise `<meta name="robots">` de
+chaque page suffit à les rouvrir, le jour où le jeu a intérêt à être trouvé.
+
+**L'accueil ne pointe vers aucune d'elles.** C'est vérifié à chaque publication
+par les deux `grep` ci-dessus.
+
+### Reconstruire le build web
+
+Depuis `~/le-bon`, avec Node 24 :
+
+```sh
+EXPO_WEB_BASE_URL=/421/jouer \
+EXPO_PUBLIC_SERVER_URL=https://jeu.xiwix.be \
+  npx expo export --platform web --output-dir /tmp/web-421
+rm -rf ~/xiwix.be/421/jouer && cp -R /tmp/web-421 ~/xiwix.be/421/jouer
+```
+
+Les **deux** variables comptent. `EXPO_WEB_BASE_URL` corrige les chemins
+d'actifs, sans quoi tout répond 404 sous le sous-chemin.
+`EXPO_PUBLIC_SERVER_URL` est figée **à la compilation** : le build actuel vise
+déjà `https://jeu.xiwix.be`, donc les tables à distance s'ouvriront toutes
+seules le jour où le VPS sera debout, sans reconstruction.
+
+Vérifier après chaque build :
+
+```sh
+grep -c 'localhost:4210' ~/xiwix.be/421/jouer/_expo/static/js/web/*.js   # doit valoir 0
+find ~/xiwix.be/421/jouer -name '*.map'                                   # doit ne rien rendre
+```
+
+Le premier attrape l'erreur qui avait déjà envoyé un binaire iOS avec l'adresse
+du domicile de Xavier gravée dedans. Le second garantit qu'aucune carte de
+source ne publie le code original — le bundle est minifié, `__DEV__=false`, et
+ne contient aucun chemin de fichier source.
+
 ## La politique de confidentialité
 
 En ligne sur `/421/confidentialite/`, en trois langues (FR complet, NL et EN

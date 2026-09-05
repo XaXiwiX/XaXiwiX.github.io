@@ -1,0 +1,11 @@
+{
+  "name": "421",
+  "short_name": "421",
+  "description": "Le 421 — jeu de dés. Solo contre des IA, entre amis sur un téléphone, ou à distance par invitation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07090D",
+  "theme_color": "#07090D",
+  "lang": "fr",
+  "icons": [{ "src": "/icon.png", "sizes": "1024x1024", "type": "image/png" }]
+}

@@ -165,7 +165,10 @@ footer strong { color: var(--ink); font-weight: 650; }
 /* ---------- pages de service (/421/) ---------- */
 
 .doc h2 { margin-top: 2.5rem; }
-.doc h2:first-of-type { margin-top: 0; }
+/* Seul le tout premier élément du document perd sa marge haute. Viser
+ * `h2:first-of-type` annulait celle du premier h2 même quand un titre et
+ * plusieurs paragraphes le précédaient — il se collait à ce qui était au-dessus. */
+.doc > :first-child { margin-top: 0; }
 .doc ul { padding-left: 1.15rem; margin: 0 0 1.1rem; }
 .doc li { margin-bottom: 0.4rem; }
 
@@ -220,3 +223,29 @@ footer strong { color: var(--ink); font-weight: 650; }
 .doc-legal h2 { margin-top: 2.75rem; font-size: 1.375rem; }
 .doc-legal h1 + .meta { margin-top: 0; }
 .doc-legal .lang-section { border-top: 1px solid var(--rule); margin-top: 4rem; padding-top: 3rem; }
+
+/* ---------- page du jeu ---------- */
+
+.cta {
+  display: inline-block; margin: 0 0.75rem 0.75rem 0;
+  padding: 0.85rem 1.6rem; border-radius: 8px;
+  font-size: 1rem; font-weight: 650; letter-spacing: -0.01em;
+  text-decoration: none; border: 1px solid var(--accent);
+}
+.cta-primary { background: var(--accent); color: var(--paper); }
+.cta-primary:hover { filter: brightness(1.12); }
+.cta-secondary { color: var(--accent); background: transparent; }
+.cta-secondary:hover { background: var(--accent-soft); }
+
+.modes { display: grid; gap: 1.25rem; margin: 2rem 0 0; padding: 0; list-style: none; }
+@media (min-width: 46rem) { .modes { grid-template-columns: repeat(3, 1fr); } }
+.modes li { border-top: 1px solid var(--rule); padding-top: 1rem; }
+.modes strong { display: block; margin-bottom: 0.35rem; letter-spacing: -0.015em; }
+.modes span { font-size: 0.9375rem; color: var(--muted); }
+
+.callout {
+  background: var(--accent-soft); border: 1px solid var(--rule);
+  border-radius: 10px; padding: 1.25rem 1.4rem; margin: 2rem 0 0;
+  font-size: 0.9375rem;
+}
+.callout strong { letter-spacing: -0.01em; }
