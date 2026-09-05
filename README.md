@@ -85,49 +85,39 @@ l'URL reste libre plutôt que fausse.
 
 Quand la page sera écrite, décommenter le lien vers elle dans `421/support/index.html`.
 
-## Publier
+## En ligne depuis le 5 septembre 2026
 
-Le dépôt est `XaXiwiX.github.io` — un *user site*, servi à la **racine** du
-domaine. Un dépôt de projet aurait servi sous `/xiwix.be/`, et les chemins absolus
-des pages (`/assets/xiwix.css`) auraient cassé tant que le domaine n'est pas
-branché. Public, parce que Pages sur dépôt privé exige un plan payant.
+`https://xiwix.be` — dépôt public `XaXiwiX/XaXiwiX.github.io`, servi à la racine
+(un *user site*). Un dépôt de projet aurait servi sous `/xiwix.be/` et cassé les
+chemins absolus des pages ; public parce que Pages sur dépôt privé exige un plan
+payant que le compte n'a pas.
 
-1. Pousser sur `main`, puis Settings → Pages → source `main` / `/`.
-2. Vérifier le site sur `https://xaxiwix.github.io/` — **avant** de toucher au DNS.
-3. Settings → Pages → Custom domain : `xiwix.be`. GitHub écrit alors le fichier
-   `CNAME` et signale que le DNS ne pointe pas encore vers lui : c'est normal.
-4. **Ensuite seulement**, basculer le DNS chez Combell.
-5. Propagation faite, cocher **Enforce HTTPS**. Le certificat Let's Encrypt est
-   émis automatiquement, sous 15 minutes à 24 heures.
+Certificat Let's Encrypt `CN=xiwix.be`, avec `www.xiwix.be` en nom alternatif.
+*Enforce HTTPS* actif : `http://` et `www` redirigent en 301 vers `https://xiwix.be/`.
 
-L'ordre compte deux fois. Basculer le DNS avant l'étape 3 ferait répondre une 404
-de GitHub sur `xiwix.be` pendant toute la fenêtre. Et committer un fichier `CNAME`
-avant l'étape 2 ferait rediriger `xaxiwix.github.io` vers un domaine qui sert
-encore la page de parking — plus de prévisualisation possible.
+### Zone DNS, telle qu'elle est
 
-## DNS chez Combell
+Serveurs de noms restés chez Combell. `A` sur l'apex vers les quatre adresses de
+GitHub Pages, `CNAME` `www` vers `xaxiwix.github.io`, `ftp` inchangé sur
+`217.21.190.139`. **Les deux `MX`, les quatre `SRV` et les trois `CNAME` de
+messagerie n'ont pas été touchés** — vérifié après l'opération, la boîte
+professionnelle n'a pas bougé.
 
-Les serveurs de noms restent ceux de Combell. Le nom d'hôte se saisit **sans le
-domaine** (`www`, jamais `www.xiwix.be`).
+    185.199.108.153   185.199.109.153   185.199.110.153   185.199.111.153
 
-À remplacer — l'unique `A` de l'apex (`217.21.190.139`) devient quatre `A`,
-nom d'hôte vide :
+Aucun `CAA` sur le domaine, rien ne bloquait l'émission.
 
-    185.199.108.153
-    185.199.109.153
-    185.199.110.153
-    185.199.111.153
+### La leçon, si le domaine doit être redéclaré un jour
 
-À remplacer — `www` : supprimer son `A`, puis créer un `CNAME` vers
-`xaxiwix.github.io.` (un même nom ne peut pas porter un `A` et un `CNAME`).
+Le domaine a été déclaré chez GitHub **avant** que le DNS pointe vers lui. La
+vérification initiale a donc échoué, et GitHub ne l'a jamais relancée seule : le
+certificat n'était pas *en attente*, il n'était même pas **demandé**. Le remède
+est de retirer le domaine et de le redéclarer, ce qui force une vérification
+immédiate — le certificat a été émis 40 secondes plus tard.
 
-**À ne toucher sous aucun prétexte** : les deux `MX` (`mx.mailprotect.be`,
-`mx.backup.mailprotect.be`), les quatre `SRV`, et les `CNAME` `autoconfig`,
-`autodiscover` et `mail`. La boîte professionnelle en dépend et il n'y en a
-qu'une. Laisser `ftp` en place.
-
-Aucun enregistrement `CAA` n'existe sur le domaine : rien ne bloquera l'émission
-du certificat.
+Dans l'autre sens : ne pas committer de fichier `CNAME` avant que Pages serve le
+site, sinon `xaxiwix.github.io` redirige vers un domaine qui n'est pas encore
+branché et il n'y a plus de prévisualisation.
 
 ## Prévisualiser en local
 
