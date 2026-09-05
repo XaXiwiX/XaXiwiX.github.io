@@ -1,22 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- `viewport-fit=cover` : sans lui, iOS réserve des bandes aux encoches
+         et à la barre de geste, et le plateau ne va pas jusqu'au bord. -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <!-- Teinte la barre d'outils de Safari : sans elle, un bandeau clair
+         surmonte un jeu entièrement sombre. -->
+    <meta name="theme-color" content="#07090D" />
     <title>421</title>
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+
     <style id="expo-reset">
-      /* These styles make the body full-height */
+      /* Modèle repris du défaut d'Expo, avec trois corrections pour mobile.
+         Le fichier généré étant réécrit à chaque export, les corriger ici est
+         le seul moyen qu'elles survivent. */
+
       html,
       body {
         height: 100%;
+        /* ⚠️ LA BANDE BLANCHE. `100%` se mesure sur une hauteur figée : quand
+           Safari rétracte sa barre d'URL, le document reste court et le fond
+           du body apparaît sous le jeu. `dvh` suit la hauteur RÉELLE, barre
+           comprise. Déclaré après `100%`, il ne casse rien là où il manque. */
+        height: 100dvh;
+        margin: 0;
+        /* Le body n'avait AUCUNE couleur : le blanc visible était le sien,
+           pas celui du jeu. */
+        background-color: #07090D;
       }
-      /* These styles disable body scrolling if you are using <ScrollView> */
+
       body {
         overflow: hidden;
+        /* Supprime le rebond élastique, qui découvrait la même bande en haut
+           comme en bas dès qu'on tirait sur le plateau. */
+        overscroll-behavior: none;
+        -webkit-tap-highlight-color: transparent;
       }
-      /* These styles make the root element full-height */
+
+      /* Les contrôles natifs (sélecteurs, champs) suivent le thème sombre. */
+      :root {
+        color-scheme: dark;
+      }
+
       #root {
         display: flex;
         height: 100%;
@@ -26,11 +55,7 @@
   <link rel="icon" href="/421/jouer/favicon.ico"/></head>
 
   <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <!-- The root element for your Expo app. -->
+    <noscript>Ce jeu a besoin de JavaScript pour fonctionner.</noscript>
     <div id="root"></div>
   <script src="/421/jouer/_expo/static/js/web/index-dcedd27b2b664dcf1ab3c93c51110aad.js" defer></script>
 </body>
